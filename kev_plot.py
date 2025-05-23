@@ -1,4 +1,8 @@
+
 import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+
 
 class Plot:
     def __init__(self):
@@ -88,3 +92,63 @@ class Plot:
             plt.savefig(save_path, bbox_inches='tight')
         if show:
             plt.show()
+     
+    def boxplot(self, data, x=None, y=None, hue=None, title="Box Plot",
+                xlabel=None, ylabel=None, figsize=(15, 10), palette='Set2',
+                title_fontsize=14, label_fontsize=12, grid=True, save_path=None, show=True, **kwargs):
+
+        plt.figure(figsize=figsize)
+        sns.boxplot(data=data, x=x, y=y, hue=hue, palette=palette, **kwargs)
+        plt.title(title, fontsize=title_fontsize)
+        if xlabel: plt.xlabel(xlabel, fontsize=label_fontsize)
+        if ylabel: plt.ylabel(ylabel, fontsize=label_fontsize)
+        if grid: plt.grid(True)
+        if save_path: plt.savefig(save_path, bbox_inches='tight')
+        if show: plt.show()
+
+    def violinplot(self, data, x=None, y=None, hue=None, title="Violin Plot",
+                   xlabel=None, ylabel=None, figsize=(15, 10), palette='Set2',
+                   title_fontsize=14, label_fontsize=12, grid=True, save_path=None, show=True, **kwargs):
+
+        plt.figure(figsize=figsize)
+        sns.violinplot(data=data, x=x, y=y, hue=hue, palette=palette, **kwargs)
+        plt.title(title, fontsize=title_fontsize)
+        if xlabel: plt.xlabel(xlabel, fontsize=label_fontsize)
+        if ylabel: plt.ylabel(ylabel, fontsize=label_fontsize)
+        if grid: plt.grid(True)
+        if save_path: plt.savefig(save_path, bbox_inches='tight')
+        if show: plt.show()
+
+    def heatmap(self, data, annot=True, cmap='coolwarm', title="Heatmap",
+                figsize=(15, 10), title_fontsize=14, cbar=True, save_path=None, show=True, **kwargs):
+
+        plt.figure(figsize=figsize)
+        sns.heatmap(data, annot=annot, cmap=cmap, cbar=cbar, **kwargs)
+        plt.title(title, fontsize=title_fontsize)
+        if save_path: plt.savefig(save_path, bbox_inches='tight')
+        if show: plt.show()
+
+    def pairplot(self, data, hue=None, palette='Set2', diag_kind='kde',
+                 title=None, save_path=None, show=True, **kwargs):
+
+        g = sns.pairplot(data=data, hue=hue, palette=palette, diag_kind=diag_kind, **kwargs)
+        if title:
+            g.fig.suptitle(title, y=1.02)
+        if save_path:
+            g.savefig(save_path, bbox_inches='tight')
+        if show:
+            plt.show()
+
+    def countplot(self, data, x, hue=None, title="Count Plot",
+                  xlabel=None, ylabel="Count", figsize=(15, 10),
+                  palette='Set2', title_fontsize=14, label_fontsize=12,
+                  grid=True, save_path=None, show=True, **kwargs):
+
+        plt.figure(figsize=figsize)
+        sns.countplot(data=data, x=x, hue=hue, palette=palette, **kwargs)
+        plt.title(title, fontsize=title_fontsize)
+        if xlabel: plt.xlabel(xlabel, fontsize=label_fontsize)
+        if ylabel: plt.ylabel(ylabel, fontsize=label_fontsize)
+        if grid: plt.grid(True)
+        if save_path: plt.savefig(save_path, bbox_inches='tight')
+        if show: plt.show()
